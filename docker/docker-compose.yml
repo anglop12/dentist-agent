@@ -1,0 +1,49 @@
+# ============================================================
+# Agente Odontológico IA - Docker Compose
+#
+# Uso básico (LLM mock, ligero):
+#   docker compose -f docker/docker-compose.yml up -d --build
+#
+# Con Ollama (LLM local real, ~4GB al descargar modelo):
+#   docker compose -f docker/docker-compose.yml --profile ollama up -d
+#
+# Nota: el worker de recordatorios corre IN-PROCESS dentro del API
+# (JobsModule + InProcessWorker), no requiere contenedor aparte.
+# ============================================================
+
+services:
+  api:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    container_name: dentist-api
+    env_file:
+      - ../.env
+    environment:
+      # Dentro de la red de compose, el propio contenedor es "localhost"
+      # y Ollama (si está activo) se llama "ollama".
+      OLLAMA_BASE_URL: ${OLLAMA_BASE_URL_DOCKER:-http://ollama:11434}
+    ports:
+      - "3000:3000"
+    volumes:
+      - ../storage:/app/storage          # BD SQLite persistente
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1:3000/healthz"]
+      interval: 30s
+      timeout: 5s
+      retries: 5
+      start_period: 40s
+
+  ollama:
+    image: ollama/ollama:latest
+    container_name: dentist-ollama
+    profiles: ["ollama"]
+    ports:
+      - "11434:11434"
+    volumes:
+      - ../storage/ollama:/root/.ollama
+    restart: unless-stopped
+
+# Para descargar el modelo tras arrancar con perfil ollama:
+#   docker exec dentist-ollama ollama pull qwen2.5:7b

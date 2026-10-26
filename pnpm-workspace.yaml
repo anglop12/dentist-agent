@@ -1,0 +1,9 @@
+packages:
+  - 'apps/*'
+  - 'packages/*'
+
+# Permitir subdependencias vía git (necesario para libsignal de Baileys)
+dangerouslyAllowAllBuilds: true
+strict-peer-dependencies: false
+auto-install-peers: true
+

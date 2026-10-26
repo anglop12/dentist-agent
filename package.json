@@ -1,0 +1,37 @@
+{
+  "name": "agente-odontologico",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Agente IA conversacional para consultorios odontológicos",
+  "license": "UNLICENSED",
+  "engines": {
+    "node": ">=20.0.0",
+    "pnpm": ">=9.0.0"
+  },
+  "packageManager": "pnpm@11.22.0+sha512.1ff870c4c6133dfd88fb2afc46dd13d47f09c9794b438c6fdb47ca98caf3bc16381ee0be93a091b8e3824cf01f889f46d7d9e20910fb0be1ab0fb5baa80dd621",
+  "scripts": {
+    "build": "pnpm -r build",
+    "dev:api": "pnpm --filter @dentist/api start:dev",
+    "dev:worker": "pnpm --filter @dentist/worker start:dev",
+    "dev:panel": "pnpm --filter @dentist/panel dev",
+    "build:panel": "pnpm --filter @dentist/panel build",
+    "start:api": "pnpm --filter @dentist/api start:prod",
+    "start:worker": "pnpm --filter @dentist/worker start:prod",
+    "lint": "pnpm -r lint",
+    "test": "pnpm -r test",
+    "test:unit": "pnpm --filter @dentist/api test:unit",
+    "test:e2e": "pnpm --filter @dentist/api test:e2e",
+    "db:generate": "pnpm --filter @dentist/api db:generate",
+    "db:migrate": "pnpm --filter @dentist/api db:migrate",
+    "db:seed": "pnpm --filter @dentist/api db:seed",
+    "db:studio": "pnpm --filter @dentist/api db:studio",
+    "replicate": "tsx bin/replicate.ts",
+    "migrate": "tsx bin/migrate.ts"
+  },
+  "devDependencies": {
+    "typescript": "5.4.5",
+    "@types/node": "20.12.7",
+    "tsx": "4.7.2",
+    "rimraf": "5.0.7"
+  }
+}

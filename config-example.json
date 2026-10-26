@@ -1,0 +1,37 @@
+{
+  "clinic": {
+    "name": "Clínica Dental Sonrisa",
+    "timezone": "America/Mexico_City",
+    "storageDir": "./storage/clinica-sonrisa"
+  },
+  "doctor": {
+    "name": "María",
+    "lastname": "Rodríguez",
+    "cedula": 12345678,
+    "email": "doctor@clinica-sonrisa.local",
+    "phone": "+584141234567",
+    "specialtyId": "spec-odontologia-general",
+    "dailyLimit": 12
+  },
+  "whatsapp": {
+    "enabled": true,
+    "sessionPath": "./storage/clinica-sonrisa/wa-session"
+  },
+  "businessHours": {
+    "startHour": 8,
+    "endHour": 18,
+    "slotMinutes": 30,
+    "workDays": [1, 2, 3, 4, 5, 6]
+  },
+  "llm": {
+    "provider": "ollama",
+    "model": "qwen2.5:7b",
+    "temperature": 0.2
+  },
+  "payments": {
+    "provider": "stripe",
+    "enabled": false,
+    "apiKey": "",
+    "webhookSecret": ""
+  }
+}

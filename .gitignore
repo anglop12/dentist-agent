@@ -1,0 +1,17 @@
+node_modules
+dist
+coverage
+.env
+.env.local
+*.log
+.DS_Store
+.idea
+.vscode
+*.sqlite
+*.sqlite-journal
+*.db
+storage/
+artifacts/
+dist/
+tmp/
+agente.md
